@@ -121,7 +121,7 @@ export default function Home() {
       </nav>
 
       {/* Header com CTA */}
-      <header className="w-full px-4 pt-16 pb-6 flex flex-col items-center text-center gap-4 bg-neutral-950 border-b border-neutral-800">
+      <header className="w-full px-4 pt-24 pb-6 flex flex-col items-center text-center gap-4 bg-neutral-950 border-b border-neutral-800">
         <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="flex flex-col items-center gap-2">
           <div className="flex items-center gap-2 mb-2">
             <Workflow className="w-8 h-8 text-cyan-400" />
