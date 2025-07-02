@@ -132,8 +132,8 @@ export default function Home() {
           </p>
         </motion.div>
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.3, duration: 0.5 }}>
-          <a href="#inscricao" data-scroll>
-            <Button size="lg" className="mt-4 px-8 py-6 text-lg font-bold bg-cyan-500 hover:bg-cyan-400 text-neutral-950 shadow-xl">
+          <a href="https://pay.kirvano.com/a405605e-6de5-4b3e-becd-4a8d250fd568" target="_blank" rel="noopener noreferrer">
+            <Button size="lg" className="mt-4 px-8 py-6 text-lg font-bold bg-gradient-to-r from-cyan-400 via-cyan-500 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-white shadow-xl border-2 border-cyan-300 pulse-cta">
               Quero automatizar agora
             </Button>
           </a>
@@ -299,8 +299,8 @@ export default function Home() {
       <motion.div id="inscricao" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="fixed bottom-4 left-0 w-full flex justify-center z-50 pointer-events-none">
         <div className="pointer-events-auto bg-cyan-500 text-neutral-950 rounded-full shadow-2xl px-6 py-3 flex items-center gap-3 animate-pulse border border-cyan-400">
           <span className="font-semibold text-lg">Pronto para automatizar?</span>
-          <Button size="lg" className="bg-neutral-950 text-cyan-400 hover:bg-neutral-900 border border-cyan-400" asChild>
-            <a href="#">Começar o curso</a>
+          <Button size="lg" className="bg-gradient-to-r from-cyan-400 via-cyan-500 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-white font-bold border-2 border-cyan-300 shadow-xl pulse-cta" asChild>
+            <a href="https://pay.kirvano.com/a405605e-6de5-4b3e-becd-4a8d250fd568" target="_blank" rel="noopener noreferrer">Começar o curso</a>
           </Button>
         </div>
       </motion.div>

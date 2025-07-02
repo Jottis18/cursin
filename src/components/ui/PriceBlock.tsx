@@ -36,10 +36,12 @@ export function PriceBlock({
       </div>
       <Button
         size="lg"
-        className="w-full max-w-xs mt-4 bg-cyan-600 hover:bg-cyan-500 text-neutral-950 text-base font-semibold py-3 rounded-lg shadow transition flex items-center justify-center gap-2"
-        onClick={onClick}
+        className="w-full max-w-xs mt-4 bg-gradient-to-r from-cyan-400 via-cyan-500 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-white font-bold py-3 rounded-lg shadow-xl transition flex items-center justify-center gap-2 border-2 border-cyan-300 pulse-cta"
+        asChild
       >
-        <Zap className="w-5 h-5" /> {ctaText}
+        <a href="https://pay.kirvano.com/a405605e-6de5-4b3e-becd-4a8d250fd568" target="_blank" rel="noopener noreferrer">
+          <Zap className="w-5 h-5" /> {ctaText}
+        </a>
       </Button>
       <div className="flex flex-col items-center gap-1 mt-3 w-full">
         <span className="text-xs text-cyan-400 font-medium flex items-center gap-1"><Clock className="w-4 h-4" /> {urgencyText}</span>
