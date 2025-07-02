@@ -1,102 +1,309 @@
+"use client";
+import { motion } from "framer-motion";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { CheckCircle, ShieldCheck, Star, Workflow, Zap, Clock, Settings, Brain, Globe, Compass, ChevronRightCircle, Smartphone, DollarSign, Users, FlaskConical, Rocket } from "lucide-react";
+import { useEffect } from "react";
+import { PriceBlock } from "@/components/ui/PriceBlock";
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
+
+const vantagens = [
+  {
+    icon: <Clock className="w-10 h-10 text-cyan-400" />, // relógio
+    title: "Ganhe tempo automatizando tarefas repetitivas",
+    desc: "Deixe que sistemas inteligentes façam o trabalho pesado. Mais tempo livre para focar no que realmente importa — e para multiplicar seus ganhos."
+  },
+  {
+    icon: <Settings className="w-10 h-10 text-cyan-400" />, // engrenagem
+    title: "Tenha uma máquina digital que vende no automático",
+    desc: "Crie fluxos de automação que atendem, entregam e vendem 24/7. Seu negócio funcionando mesmo quando você não está."
+  },
+  {
+    icon: <DollarSign className="w-10 h-10 text-cyan-400" />, // dinheiro
+    title: "Transforme suas automações em dinheiro no bolso",
+    desc: "Automatize processos que geram receita e criam oportunidades de vendas recorrentes. A fórmula para escalar sua renda sem aumentar sua carga de trabalho."
+  },
+  {
+    icon: <Rocket className="w-10 h-10 text-cyan-400" />, // foguete
+    title: "Construa e venda seu próprio SaaS com IA e automações verticais",
+    desc: "Seja o dono de soluções digitais que clientes vão pagar todo mês. Escale seu faturamento e conquiste liberdade financeira real."
+  }
+];
+
+const metodo = [
+  {
+    icon: <Compass className="w-7 h-7 text-cyan-400" />,
+    title: "Etapa 1 — Fundamentos da Automação",
+    desc: "Aprenda como funcionam webhooks, APIs, lógica condicional, e o básico do n8n. Entenda os fundamentos para construir automações escaláveis e confiáveis."
+  },
+  {
+    icon: <Settings className="w-7 h-7 text-cyan-400" />,
+    title: "Etapa 2 — Automação com Casos Reais",
+    desc: "Vamos implementar automações que minha agência já usou com sucesso: agendamentos, sistemas de atendimento automático, notificações e muito mais — tudo com n8n e IA."
+  },
+  {
+    icon: <Brain className="w-7 h-7 text-cyan-400" />,
+    title: "Etapa 3 — Criando SaaS com IA Vertical",
+    desc: "Você vai aprender a criar SaaS completos voltados para nichos específicos (ex: clínicas, escritórios, freelancers), combinando automações + inteligência artificial."
+  },
+  {
+    icon: <Smartphone className="w-7 h-7 text-cyan-400" />,
+    title: "Etapa 4 — Integração com dispositivos reais",
+    desc: "Mostro como integro iPhones, atalhos da Apple e apps nativos em automações para controle de ações físicas e digitais — do celular ao servidor."
+  },
+  {
+    icon: <FlaskConical className="w-7 h-7 text-cyan-400" />,
+    title: "Etapa 5 — Boas práticas e engenharia de automações",
+    desc: "Aqui você aprende a estruturar automações com mentalidade de engenheiro de software: versionamento, modularização de fluxos, tratamento de erros, logs, comentários e padrões para reuso e manutenção. É o que diferencia um amador de alguém profissional."
+  },
+  {
+    icon: <Rocket className="w-7 h-7 text-cyan-400" />,
+    title: "Etapa 6 — Venda, tráfego e monetização",
+    desc: "Crie páginas de venda, estratégias de tráfego pago e orgânico. Aprenda a vender suas automações, oferecer como serviço ou transformar em produto SaaS com recorrência."
+  }
+];
+
+const testimonials = [
+  {
+    name: "Lucas Andrade",
+    text: "Montei um CRM automatizado e comecei a vender minhas soluções em poucos dias. Trabalho menos, ganho mais e estou conquistando minha liberdade financeira.",
+    avatar: "/avatar1.png"
+  },
+  {
+    name: "Fernanda Lima",
+    text: "Passei a vender automações para empresas e hoje vivo só disso, sem chefe ou horário fixo. Minha renda disparou!",
+    avatar: "/avatar2.png"
+  },
+  {
+    name: "Rafael Souza",
+    text: "Criei produtos digitais com SaaS e integrações. Agora tenho uma renda estável e escalável, com liberdade e segurança.",
+    avatar: "/avatar3.png"
+  }
+];
+
+// Scroll suave para âncoras
+function scrollToId(id: string) {
+  const el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  // Corrige scroll suave em hash links (SSR)
+  useEffect(() => {
+    const handler = (e: any) => {
+      if (e.target.matches("[data-scroll]")) {
+        e.preventDefault();
+        scrollToId(e.target.getAttribute("href")!.replace("#", ""));
+      }
+    };
+    document.addEventListener("click", handler);
+    return () => document.removeEventListener("click", handler);
+  }, []);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
+  return (
+    <div className="bg-neutral-950 text-neutral-100 min-h-screen flex flex-col relative font-sans">
+      {/* Menu fixo topo direito */}
+      <nav className="fixed top-6 right-6 z-50 bg-neutral-900/80 backdrop-blur-md rounded-full shadow-lg border border-neutral-800 flex gap-2 px-4 py-2 items-center">
+        <a href="#vantagens" data-scroll className="text-cyan-300 font-semibold px-3 py-1 rounded hover:bg-cyan-900/20 transition text-sm">Vantagens</a>
+        <a href="#metodo" data-scroll className="text-cyan-300 font-semibold px-3 py-1 rounded hover:bg-cyan-900/20 transition text-sm">Método</a>
+        <a href="#garantia" data-scroll className="text-cyan-300 font-semibold px-3 py-1 rounded hover:bg-cyan-900/20 transition text-sm">Garantia</a>
+        <a href="#duvidas" data-scroll className="text-cyan-300 font-semibold px-3 py-1 rounded hover:bg-cyan-900/20 transition text-sm">Dúvidas</a>
+      </nav>
+
+      {/* Header com CTA */}
+      <header className="w-full px-4 pt-16 pb-6 flex flex-col items-center text-center gap-4 bg-neutral-950 border-b border-neutral-800">
+        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="flex flex-col items-center gap-2">
+          <div className="flex items-center gap-2 mb-2">
+            <Workflow className="w-8 h-8 text-cyan-400" />
+            <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-cyan-400">Automação Academy</h1>
+          </div>
+          <p className="text-lg text-neutral-300 max-w-2xl font-medium">
+            Aprenda a criar sistemas automatizados, SaaS e integrações profissionais usando <span className="text-cyan-300 font-semibold">n8n</span> e ferramentas no-code. Ganhe produtividade, independência digital e novas fontes de renda.
+          </p>
+        </motion.div>
+        <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.3, duration: 0.5 }}>
+          <a href="#inscricao" data-scroll>
+            <Button size="lg" className="mt-4 px-8 py-6 text-lg font-bold bg-cyan-500 hover:bg-cyan-400 text-neutral-950 shadow-xl">
+              Quero automatizar agora
+            </Button>
           </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+        </motion.div>
+      </header>
+
+      {/* Seção VSL */}
+      <section className="w-full flex flex-col items-center px-4 py-10 bg-neutral-950 border-b border-neutral-900">
+        <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-xl font-semibold mb-4 text-cyan-300">
+          Veja como o curso funciona e o que você vai construir
+        </motion.h2>
+        <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="w-full max-w-2xl aspect-video rounded-xl overflow-hidden shadow-2xl border border-neutral-800">
+          <iframe
+            className="w-full h-full bg-black"
+            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+            title="VSL - Vídeo de Vendas"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        </motion.div>
+      </section>
+
+      {/* Vantagens */}
+      <section id="vantagens" className="w-full px-4 py-14 flex flex-col items-center bg-neutral-950 border-b border-neutral-900 scroll-mt-24">
+        <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-2xl font-bold mb-4 text-cyan-300 text-center">
+          Vantagens de dominar automações, n8n, SaaS e IA
+        </motion.h2>
+        <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.15, duration: 0.6 }} className="text-lg text-neutral-300 max-w-2xl mb-10 text-center font-medium">
+          Construa sistemas que faturam por você — mesmo enquanto você dorme.
+        </motion.p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-4xl w-full">
+          {vantagens.map((v, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.15, duration: 0.6 }}
+              className="flex flex-col items-center text-center bg-neutral-900 rounded-2xl p-8 shadow-lg border border-neutral-800 gap-4"
+            >
+              <div>{v.icon}</div>
+              <h3 className="text-lg font-bold text-neutral-100 mb-1">{v.title}</h3>
+              <p className="text-neutral-300 text-base">{v.desc}</p>
+            </motion.div>
+          ))}
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+        <div className="mt-12 w-full"><PriceBlock price="R$ 299,90" ctaText="Quero faturar com automações" /></div>
+      </section>
+
+      {/* Método */}
+      <section id="metodo" className="w-full px-4 py-14 flex flex-col items-center bg-neutral-950 border-b border-neutral-900 scroll-mt-24">
+        <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-2xl font-bold mb-10 text-cyan-300 text-center">
+          Conheça as 6 etapas do <span className="text-cyan-400">Método Automa7ic</span>
+        </motion.h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl w-full">
+          {metodo.map((m, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.15, duration: 0.6 }}
+              className="flex flex-col items-center text-center bg-neutral-900 rounded-2xl p-8 shadow-lg border border-neutral-800 gap-3 relative"
+            >
+              <div className="mb-2">{m.icon}</div>
+              <h3 className="text-lg font-bold text-neutral-100 mb-1">{m.title}</h3>
+              <p className="text-neutral-300 text-base">{m.desc}</p>
+              {/* Círculo decorativo */}
+              <span className="absolute -top-4 -right-4 w-8 h-8 rounded-full bg-cyan-900/20 blur-sm hidden md:block" />
+            </motion.div>
+          ))}
+        </div>
+        <div className="mt-12 w-full"><PriceBlock price="R$ 299,90" /></div>
+      </section>
+
+      {/* Depoimentos */}
+      <section className="w-full px-4 py-10 bg-neutral-950 border-b border-neutral-900 flex flex-col items-center">
+        <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-xl font-semibold mb-6 text-cyan-300">
+          Resultados de quem já automatizou
+        </motion.h2>
+        <div className="flex flex-col sm:flex-row gap-6 w-full max-w-3xl justify-center">
+          {testimonials.map((t, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.2, duration: 0.6 }}
+              className="bg-neutral-900 rounded-xl shadow-lg p-6 flex-1 flex flex-col items-center border border-neutral-800"
+            >
+              <Star className="text-yellow-400 mb-2" />
+              <Image src={t.avatar} alt={t.name} width={56} height={56} className="rounded-full mb-2 border border-neutral-700" />
+              <p className="text-base italic mb-2 text-center text-neutral-200">“{t.text}”</p>
+              <span className="font-semibold text-sm text-cyan-300">{t.name}</span>
+            </motion.div>
+          ))}
+        </div>
+        <div className="mt-12 w-full"><PriceBlock price="R$ 299,90" /></div>
+      </section>
+
+      {/* Garantia */}
+      <section id="garantia" className="w-full px-4 py-10 flex flex-col items-center bg-neutral-950 border-b border-neutral-900 scroll-mt-24">
+        <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="flex flex-col items-center gap-3 max-w-xl text-center">
+          <ShieldCheck className="w-10 h-10 text-cyan-400" />
+          <h3 className="text-lg font-bold text-neutral-100">Garantia de 7 Dias</h3>
+          <p className="text-base text-neutral-400">Teste o curso sem risco. Se não for para você, devolvemos 100% do valor em até 7 dias.</p>
+        </motion.div>
+      </section>
+
+      {/* Dúvidas Frequentes */}
+      <section id="duvidas" className="w-full px-4 py-16 flex flex-col items-center bg-neutral-950 border-b border-neutral-900 scroll-mt-24">
+        <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-2xl font-bold mb-10 text-cyan-300 text-center">
+          Perguntas Frequentes
+        </motion.h2>
+        <div className="w-full max-w-2xl mx-auto">
+          <Accordion type="single" collapsible className="space-y-3">
+            <AccordionItem value="1">
+              <AccordionTrigger className="text-base font-semibold bg-neutral-900 rounded-lg px-4 py-3 shadow border border-neutral-800 text-cyan-300">Quais são as formas de pagamento?</AccordionTrigger>
+              <AccordionContent className="bg-neutral-950 text-neutral-200 rounded-b-lg px-4 py-3 border-t border-neutral-800">Você pode pagar com Cartão de Crédito, PIX, Boleto ou PayPal. Parcelamos em até 12x sem juros no cartão.</AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="2">
+              <AccordionTrigger className="text-base font-semibold bg-neutral-900 rounded-lg px-4 py-3 shadow border border-neutral-800 text-cyan-300">Como recebo o acesso ao curso?</AccordionTrigger>
+              <AccordionContent className="bg-neutral-950 text-neutral-200 rounded-b-lg px-4 py-3 border-t border-neutral-800">Após a confirmação do pagamento, você recebe um e-mail com o acesso à plataforma. No caso de boleto, pode levar até 2 dias úteis.</AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="3">
+              <AccordionTrigger className="text-base font-semibold bg-neutral-900 rounded-lg px-4 py-3 shadow border border-neutral-800 text-cyan-300">O conteúdo é ao vivo ou gravado?</AccordionTrigger>
+              <AccordionContent className="bg-neutral-950 text-neutral-200 rounded-b-lg px-4 py-3 border-t border-neutral-800">Todas as aulas são gravadas para você assistir quando e quantas vezes quiser. Mas teremos encontros ao vivo opcionais para tirar dúvidas e revisar projetos.</AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="4">
+              <AccordionTrigger className="text-base font-semibold bg-neutral-900 rounded-lg px-4 py-3 shadow border border-neutral-800 text-cyan-300">Por quanto tempo tenho acesso?</AccordionTrigger>
+              <AccordionContent className="bg-neutral-950 text-neutral-200 rounded-b-lg px-4 py-3 border-t border-neutral-800">Você terá acesso vitalício ao conteúdo. Isso inclui atualizações e novos módulos que forem lançados no futuro.</AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="5">
+              <AccordionTrigger className="text-base font-semibold bg-neutral-900 rounded-lg px-4 py-3 shadow border border-neutral-800 text-cyan-300">Onde assisto as aulas?</AccordionTrigger>
+              <AccordionContent className="bg-neutral-950 text-neutral-200 rounded-b-lg px-4 py-3 border-t border-neutral-800">Tudo é entregue por uma plataforma moderna e simples, com login pessoal. Pode acessar pelo computador ou celular.</AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="6">
+              <AccordionTrigger className="text-base font-semibold bg-neutral-900 rounded-lg px-4 py-3 shadow border border-neutral-800 text-cyan-300">O pagamento é seguro?</AccordionTrigger>
+              <AccordionContent className="bg-neutral-950 text-neutral-200 rounded-b-lg px-4 py-3 border-t border-neutral-800">100%. As transações são processadas por plataformas confiáveis como Hotmart ou Kirvano, com certificação de segurança e criptografia.</AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="7">
+              <AccordionTrigger className="text-base font-semibold bg-neutral-900 rounded-lg px-4 py-3 shadow border border-neutral-800 text-cyan-300">Moro fora do Brasil. Posso comprar?</AccordionTrigger>
+              <AccordionContent className="bg-neutral-950 text-neutral-200 rounded-b-lg px-4 py-3 border-t border-neutral-800">Sim! O pagamento internacional pode ser feito via PayPal ou cartão internacional. O acesso é liberado normalmente após a compra.</AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="8">
+              <AccordionTrigger className="text-base font-semibold bg-neutral-900 rounded-lg px-4 py-3 shadow border border-neutral-800 text-cyan-300">Já trabalho com automações. Esse curso serve pra mim?</AccordionTrigger>
+              <AccordionContent className="bg-neutral-950 text-neutral-200 rounded-b-lg px-4 py-3 border-t border-neutral-800">Com certeza. Você vai aprender fluxos avançados com IA, integração entre dispositivos, criação de SaaS verticais e estratégias de venda — tudo validado em projetos reais.</AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="9">
+              <AccordionTrigger className="text-base font-semibold bg-neutral-900 rounded-lg px-4 py-3 shadow border border-neutral-800 text-cyan-300">Sou iniciante. Consigo acompanhar?</AccordionTrigger>
+              <AccordionContent className="bg-neutral-950 text-neutral-200 rounded-b-lg px-4 py-3 border-t border-neutral-800">Sim! O curso começa do básico absoluto: te ensino o que é webhook, como conectar APIs, até criar sistemas prontos para serem vendidos.</AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="10">
+              <AccordionTrigger className="text-base font-semibold bg-neutral-900 rounded-lg px-4 py-3 shadow border border-neutral-800 text-cyan-300">Preciso aparecer ou ser influencer?</AccordionTrigger>
+              <AccordionContent className="bg-neutral-950 text-neutral-200 rounded-b-lg px-4 py-3 border-t border-neutral-800">Não precisa. O curso é feito pra quem quer criar soluções automatizadas e vender mesmo nos bastidores. Você pode montar um SaaS inteiro e vender online sem mostrar seu rosto.</AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </div>
+      </section>
+
+      {/* Call to Action Final */}
+      <motion.div id="inscricao" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="fixed bottom-4 left-0 w-full flex justify-center z-50 pointer-events-none">
+        <div className="pointer-events-auto bg-cyan-500 text-neutral-950 rounded-full shadow-2xl px-6 py-3 flex items-center gap-3 animate-pulse border border-cyan-400">
+          <span className="font-semibold text-lg">Pronto para automatizar?</span>
+          <Button size="lg" className="bg-neutral-950 text-cyan-400 hover:bg-neutral-900 border border-cyan-400" asChild>
+            <a href="#">Começar o curso</a>
+          </Button>
+        </div>
+      </motion.div>
+
+      {/* Footer */}
+      <footer className="w-full mt-auto py-8 px-4 flex flex-col items-center gap-2 text-xs text-neutral-500 bg-neutral-950 border-t border-neutral-900">
+        <span>Automação Academy &copy; {new Date().getFullYear()}</span>
+        <div className="flex gap-4">
+          <a href="#" className="hover:underline">Termos de Uso</a>
+          <a href="#" className="hover:underline">Política de Privacidade</a>
+        </div>
       </footer>
     </div>
   );
