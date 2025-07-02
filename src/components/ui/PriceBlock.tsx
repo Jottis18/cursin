@@ -1,6 +1,7 @@
 import { Button } from "./button";
 import { ShieldCheck, Clock, Zap } from "lucide-react";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 interface PriceBlockProps {
   originalPrice?: string;
@@ -19,6 +20,18 @@ export function PriceBlock({
   urgencyText = "Promoção por tempo limitado",
   details = "Acesso vitalício + 7 dias de garantia."
 }: PriceBlockProps) {
+  // Contador regressivo de 24h
+  const [timeLeft, setTimeLeft] = useState(24 * 60 * 60); // 24 horas em segundos
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+  const hours = String(Math.floor(timeLeft / 3600)).padStart(2, '0');
+  const minutes = String(Math.floor((timeLeft % 3600) / 60)).padStart(2, '0');
+  const seconds = String(timeLeft % 60).padStart(2, '0');
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -27,6 +40,11 @@ export function PriceBlock({
       transition={{ duration: 0.6 }}
       className="w-full max-w-md mx-auto bg-neutral-900/90 rounded-xl shadow-lg border border-cyan-900 px-6 py-7 flex flex-col items-center gap-2 text-center"
     >
+      {/* Contador regressivo */}
+      <div className="flex items-center justify-center gap-2 mb-2 animate-pulse">
+        <Clock className="w-5 h-5 text-cyan-400" />
+        <span className="text-cyan-300 font-bold text-lg tracking-widest">Oferta termina em: {hours}:{minutes}:{seconds}</span>
+      </div>
       <div className="flex flex-col gap-1 w-full">
         <span className="text-sm text-neutral-500 line-through">De {originalPrice}</span>
         <span className="text-2xl sm:text-3xl font-bold text-cyan-300">Por {price}</span>
