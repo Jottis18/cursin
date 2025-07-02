@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, ShieldCheck, Star, Workflow, Zap, Clock, Settings, Brain, Globe, Compass, ChevronRightCircle, Smartphone, DollarSign, Users, FlaskConical, Rocket } from "lucide-react";
+import { CheckCircle, ShieldCheck, Star, Workflow, Clock, Settings, Brain, Compass, Smartphone, DollarSign, FlaskConical, Rocket } from "lucide-react";
 import { useEffect } from "react";
 import { PriceBlock } from "@/components/ui/PriceBlock";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
@@ -92,10 +92,12 @@ function scrollToId(id: string) {
 export default function Home() {
   // Corrige scroll suave em hash links (SSR)
   useEffect(() => {
-    const handler = (e: any) => {
-      if (e.target.matches("[data-scroll]")) {
+    const handler = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target && target.matches && target.matches("[data-scroll]")) {
         e.preventDefault();
-        scrollToId(e.target.getAttribute("href")!.replace("#", ""));
+        const href = (target as HTMLAnchorElement).getAttribute("href");
+        if (href) scrollToId(href.replace("#", ""));
       }
     };
     document.addEventListener("click", handler);
