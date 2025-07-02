@@ -107,7 +107,13 @@ export default function Home() {
   return (
     <div className="bg-neutral-950 text-neutral-100 min-h-screen flex flex-col relative font-sans">
       {/* Menu fixo topo direito */}
-      <nav className="fixed top-6 right-6 z-50 bg-neutral-900/80 backdrop-blur-md rounded-full shadow-lg border border-neutral-800 flex gap-2 px-4 py-2 items-center">
+      <nav className="
+        fixed top-4 left-1/2 -translate-x-1/2 z-50
+        bg-neutral-900/80 backdrop-blur-md rounded-full shadow-lg border border-neutral-800
+        flex gap-2 px-2 py-2 items-center
+        max-w-[98vw]
+        md:top-6 md:left-auto md:right-6 md:-translate-x-0 md:px-4
+      ">
         <a href="#vantagens" data-scroll className="text-cyan-300 font-semibold px-3 py-1 rounded hover:bg-cyan-900/20 transition text-sm">Vantagens</a>
         <a href="#metodo" data-scroll className="text-cyan-300 font-semibold px-3 py-1 rounded hover:bg-cyan-900/20 transition text-sm">Método</a>
         <a href="#garantia" data-scroll className="text-cyan-300 font-semibold px-3 py-1 rounded hover:bg-cyan-900/20 transition text-sm">Garantia</a>
