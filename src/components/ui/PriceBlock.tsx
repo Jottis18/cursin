@@ -9,7 +9,6 @@ interface PriceBlockProps {
   ctaText?: string;
   urgencyText?: string;
   details?: string;
-  onClick?: () => void;
 }
 
 export function PriceBlock({
@@ -18,8 +17,7 @@ export function PriceBlock({
   installment = "12x de R$ 29,90",
   ctaText = "Quero automatizar minha vida",
   urgencyText = "Promoção por tempo limitado",
-  details = "Acesso vitalício + 7 dias de garantia.",
-  onClick
+  details = "Acesso vitalício + 7 dias de garantia."
 }: PriceBlockProps) {
   return (
     <motion.div
