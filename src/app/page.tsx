@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, ShieldCheck, Star, Workflow, Clock, Settings, Brain, Compass, Smartphone, DollarSign, FlaskConical, Rocket } from "lucide-react";
+import { ShieldCheck, Star, Workflow, Clock, Settings, Brain, Compass, Smartphone, DollarSign, FlaskConical, Rocket } from "lucide-react";
 import { useEffect } from "react";
 import { PriceBlock } from "@/components/ui/PriceBlock";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
