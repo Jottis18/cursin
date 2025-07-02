@@ -125,7 +125,7 @@ export default function Home() {
         <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="flex flex-col items-center gap-2">
           <div className="flex items-center gap-2 mb-2">
             <Workflow className="w-8 h-8 text-cyan-400" />
-            <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-cyan-400">Automação Academy</h1>
+            <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-cyan-400">AutoSaas Academy</h1>
           </div>
           <p className="text-lg text-neutral-300 max-w-2xl font-medium">
             Aprenda a criar sistemas automatizados, SaaS e integrações profissionais usando <span className="text-cyan-300 font-semibold">n8n</span> e ferramentas no-code. Ganhe produtividade, independência digital e novas fontes de renda.
@@ -187,7 +187,7 @@ export default function Home() {
       {/* Método */}
       <section id="metodo" className="w-full px-4 py-14 flex flex-col items-center bg-neutral-950 border-b border-neutral-900 scroll-mt-24">
         <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-2xl font-bold mb-10 text-cyan-300 text-center">
-          Conheça as 6 etapas do <span className="text-cyan-400">Método Automa7ic</span>
+          Conheça as 6 etapas do <span className="text-cyan-400">Método AutoSaas</span>
         </motion.h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl w-full">
           {metodo.map((m, i) => (
@@ -307,7 +307,7 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="w-full mt-auto py-8 px-4 flex flex-col items-center gap-2 text-xs text-neutral-500 bg-neutral-950 border-t border-neutral-900">
-        <span>Automação Academy &copy; {new Date().getFullYear()}</span>
+        <span>AutoSaas Academy &copy; {new Date().getFullYear()}</span>
         <div className="flex gap-4">
           <a href="#" className="hover:underline">Termos de Uso</a>
           <a href="#" className="hover:underline">Política de Privacidade</a>
