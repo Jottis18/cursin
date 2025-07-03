@@ -20,14 +20,32 @@ export function PriceBlock({
   urgencyText = "Promoção por tempo limitado",
   details = "Acesso vitalício + 7 dias de garantia."
 }: PriceBlockProps) {
-  // Contador regressivo de 24h
-  const [timeLeft, setTimeLeft] = useState(24 * 60 * 60); // 24 horas em segundos
+  // Contador regressivo de 24h persistente
+  const TOTAL_SECONDS = 24 * 60 * 60; // 24 horas em segundos
+  const [timeLeft, setTimeLeft] = useState(TOTAL_SECONDS);
+
   useEffect(() => {
-    const interval = setInterval(() => {
-      setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
-    }, 1000);
+    // Recupera ou define o início do contador
+    let start = localStorage.getItem("priceBlockCountdownStart");
+    if (!start) {
+      start = Date.now().toString();
+      localStorage.setItem("priceBlockCountdownStart", start);
+    }
+    const startTime = parseInt(start, 10);
+
+    const update = () => {
+      const elapsed = Math.floor((Date.now() - startTime) / 1000);
+      const remaining = TOTAL_SECONDS - elapsed;
+      setTimeLeft(remaining > 0 ? remaining : 0);
+      if (remaining <= 0) {
+        localStorage.removeItem("priceBlockCountdownStart");
+      }
+    };
+    update();
+    const interval = setInterval(update, 1000);
     return () => clearInterval(interval);
   }, []);
+
   const hours = String(Math.floor(timeLeft / 3600)).padStart(2, '0');
   const minutes = String(Math.floor((timeLeft % 3600) / 60)).padStart(2, '0');
   const seconds = String(timeLeft % 60).padStart(2, '0');

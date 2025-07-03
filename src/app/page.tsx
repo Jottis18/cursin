@@ -127,8 +127,8 @@ export default function Home() {
             <Workflow className="w-8 h-8 text-cyan-400" />
             <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-cyan-400">AutoSaas Academy</h1>
           </div>
-          <p className="text-lg text-neutral-300 max-w-2xl font-medium">
-            Aprenda a criar sistemas automatizados, SaaS e integrações profissionais usando <span className="text-cyan-300 font-semibold">n8n</span> e ferramentas no-code. Ganhe produtividade, independência digital e novas fontes de renda.
+          <p className="text-lg max-w-2xl font-medium text-neutral-200">
+            Transforme sua vida com <span className="text-cyan-300 font-semibold">automações</span> e <span className="text-cyan-300 font-semibold">SaaS</span> usando <span className="text-cyan-300 font-semibold">inteligência artificial</span> — sem precisar programar!
           </p>
         </motion.div>
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.3, duration: 0.5 }}>
