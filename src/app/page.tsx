@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ShieldCheck, Star, Workflow, Clock, Settings, Brain, Compass, Smartphone, DollarSign, FlaskConical, Rocket } from "lucide-react";
+import { ShieldCheck, Workflow, Clock, Settings, Brain, Compass, Smartphone, DollarSign, FlaskConical, Rocket } from "lucide-react";
 import { useEffect } from "react";
 import { PriceBlock } from "@/components/ui/PriceBlock";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
