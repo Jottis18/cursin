@@ -1,6 +1,5 @@
 "use client";
 import { motion } from "framer-motion";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ShieldCheck, Star, Workflow, Clock, Settings, Brain, Compass, Smartphone, DollarSign, FlaskConical, Rocket } from "lucide-react";
 import { useEffect } from "react";
@@ -60,24 +59,6 @@ const metodo = [
     icon: <Rocket className="w-7 h-7 text-cyan-400" />,
     title: "Etapa 6 — Venda, tráfego e monetização",
     desc: "Crie páginas de venda, estratégias de tráfego pago e orgânico. Aprenda a vender suas automações, oferecer como serviço ou transformar em produto SaaS com recorrência."
-  }
-];
-
-const testimonials = [
-  {
-    name: "Lucas Andrade",
-    text: "Montei um CRM automatizado e comecei a vender minhas soluções em poucos dias. Trabalho menos, ganho mais e estou conquistando minha liberdade financeira.",
-    avatar: "/avatar1.png"
-  },
-  {
-    name: "Fernanda Lima",
-    text: "Passei a vender automações para empresas e hoje vivo só disso, sem chefe ou horário fixo. Minha renda disparou!",
-    avatar: "/avatar2.png"
-  },
-  {
-    name: "Rafael Souza",
-    text: "Criei produtos digitais com SaaS e integrações. Agora tenho uma renda estável e escalável, com liberdade e segurança.",
-    avatar: "/avatar3.png"
   }
 ];
 
@@ -209,33 +190,6 @@ export default function Home() {
         </div>
         <div className="mt-12 w-full"><PriceBlock price="R$ 299,90" /></div>
       </section>
-
-      {/* Depoimentos */}
-      {/*
-      <section className="w-full px-4 py-10 bg-neutral-950 border-b border-neutral-900 flex flex-col items-center">
-        <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-xl font-semibold mb-6 text-cyan-300">
-          Resultados de quem já automatizou
-        </motion.h2>
-        <div className="flex flex-col sm:flex-row gap-6 w-full max-w-3xl justify-center">
-          {testimonials.map((t, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.2, duration: 0.6 }}
-              className="bg-neutral-900 rounded-xl shadow-lg p-6 flex-1 flex flex-col items-center border border-neutral-800"
-            >
-              <Star className="text-yellow-400 mb-2" />
-              <Image src={t.avatar} alt={t.name} width={56} height={56} className="rounded-full mb-2 border border-neutral-700" />
-              <p className="text-base italic mb-2 text-center text-neutral-200">“{t.text}”</p>
-              <span className="font-semibold text-sm text-cyan-300">{t.name}</span>
-            </motion.div>
-          ))}
-        </div>
-        <div className="mt-12 w-full"><PriceBlock price="R$ 299,90" /></div>
-      </section>
-      */}
 
       {/* Garantia */}
       <section id="garantia" className="w-full px-4 py-10 flex flex-col items-center bg-neutral-950 border-b border-neutral-900 scroll-mt-24">
