@@ -148,11 +148,11 @@ export default function Home() {
         <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="w-full max-w-2xl aspect-video rounded-xl overflow-hidden shadow-2xl border border-neutral-800">
           <iframe
             className="w-full h-full bg-black"
-            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+            src="https://www.youtube.com/embed/WjXDPvtKcs0?controls=0&disablekb=1&modestbranding=1&rel=0&fs=0"
             title="VSL - Vídeo de Vendas"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
+            allowFullScreen={false}
           ></iframe>
         </motion.div>
       </section>
@@ -211,6 +211,7 @@ export default function Home() {
       </section>
 
       {/* Depoimentos */}
+      {/*
       <section className="w-full px-4 py-10 bg-neutral-950 border-b border-neutral-900 flex flex-col items-center">
         <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-xl font-semibold mb-6 text-cyan-300">
           Resultados de quem já automatizou
@@ -234,6 +235,7 @@ export default function Home() {
         </div>
         <div className="mt-12 w-full"><PriceBlock price="R$ 299,90" /></div>
       </section>
+      */}
 
       {/* Garantia */}
       <section id="garantia" className="w-full px-4 py-10 flex flex-col items-center bg-neutral-950 border-b border-neutral-900 scroll-mt-24">
