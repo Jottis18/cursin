@@ -129,7 +129,7 @@ export default function Home() {
         <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="w-full max-w-2xl aspect-video rounded-xl overflow-hidden shadow-2xl border border-neutral-800">
           <iframe
             className="w-full h-full bg-black"
-            src="https://www.youtube.com/embed/WjXDPvtKcs0?controls=0&disablekb=1&modestbranding=1&rel=0&fs=0"
+            src="https://www.youtube.com/embed/8Wp1Djpx8kU?controls=0&disablekb=1&modestbranding=1&rel=0&fs=0"
             title="VSL - Vídeo de Vendas"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
